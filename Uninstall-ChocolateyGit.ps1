@@ -1,4 +1,4 @@
-# Uninstall Chocolatey and Git
+# Uninstall Git
 
 choco uninstall git.install -y
 Remove-Item "$($env:USERPROFILE)\.gitconfig" -force
