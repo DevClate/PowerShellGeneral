@@ -10,14 +10,7 @@ if (!(Test-Path $ExcelFilePath)) {
 # Open the Excel file
 $excel = New-Object -TypeName OfficeOpenXml.ExcelPackage -ArgumentList (Get-Item $excelFilePath)
 
-# Get the worksheet names
-$worksheetNames = $excel.Workbook.Worksheets | ForEach-Object { $_.Name }
-
-# Add quotes around each worksheet name and convert them to a comma-separated string
-$commaSeparatedWorksheetNames = ($worksheetNames | ForEach-Object { '"' + $_ + '"' }) -join ','
-
-# Export the worksheet names to a CSV file
-$commaSeparatedWorksheetNames | Set-Content -Path $outputCsvPath
+'"'+$($excel.Workbook.Worksheets.Name -join '","')+'"' | Set-Content -Path $outputCsvPath
 
 # Dispose the ExcelPackage object to release resources
 $excel.Dispose()
